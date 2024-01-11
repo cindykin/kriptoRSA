@@ -138,11 +138,14 @@ def RSA_encrypt(file_path,e,n):
   np.save('key_b.npy', key_b)
 
   combined_image = combine_channels(r, g, b, w, h) / 255.0
+  np.save('encrypted_array.npy', combined_image)
+
   key_r_path = 'key_r.npy'
   key_g_path = 'key_g.npy'
   key_b_path = 'key_b.npy'
-
-  return combined_image, key_r_path, key_g_path, key_b_path
+  combined_array = 'encrypted_array.npy'
+  
+  return combined_image, combined_array, key_r_path, key_g_path, key_b_path
 
 
 
@@ -158,9 +161,12 @@ def decryption(m, k, d, n):
     return m_plain
 
 def RSA_decrypt(m, kr, kg, kb, d, n):
+    if not isinstance(m, np.ndarray):
+        raise ValueError("Input 'm' must be a NumPy array")
+
     cipher_img = m * 255.0
     w, h = image_shape(cipher_img)
-    r, g, b = construct_rgb(cipher_img,w,h)
+    r, g, b = construct_rgb(cipher_img, w, h)
 
     key_r = np.load(kr)
     key_b = np.load(kb)
@@ -173,6 +179,7 @@ def RSA_decrypt(m, kr, kg, kb, d, n):
     combined_image = combine_channels(r_plain, g_plain, b_plain, w, h) / 255.0
 
     return combined_image
+
 
 
 

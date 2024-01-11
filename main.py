@@ -1,6 +1,5 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
-from kriptoRSA.pages.util import gen_keypair
+from util import gen_keypair
 from style import style
 
 st.set_page_config(

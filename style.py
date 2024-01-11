@@ -5,7 +5,7 @@ def style() :
     <style>
     .appview-container {
         background-color: #f1f1ff;
-        background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f1f1ff 17px ), repeating-linear-gradient( #c6cbff55, #c6cbff );
+        background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f1f1ff 40px ), repeating-linear-gradient( #c6cbff55, #c6cbff );
     }
 
     [data-testid="stHeader"] {
@@ -27,7 +27,6 @@ def style() :
     </style>
     """
     st.markdown(custom, unsafe_allow_html=True)
-
     
     st.markdown(
         """
