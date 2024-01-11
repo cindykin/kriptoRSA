@@ -1,0 +1,2 @@
+numpy
+streamlit_option_menu
