@@ -1,4 +1,3 @@
-import streamlit as st
 import random
 import numpy as np
 import matplotlib.image as img
@@ -162,12 +161,14 @@ def decryption(m, k, d, n):
 
 def RSA_decrypt(m, kr, kg, kb, d, n):
     if not isinstance(m, np.ndarray):
-        raise ValueError("Input 'm' must be a NumPy array")
+        m = np.load(m)
+        # raise ValueError("Input 'm' must be a NumPy array")
 
     cipher_img = m * 255.0
     w, h = image_shape(cipher_img)
     r, g, b = construct_rgb(cipher_img, w, h)
 
+    
     key_r = np.load(kr)
     key_b = np.load(kb)
     key_g = np.load(kg)
@@ -179,10 +180,6 @@ def RSA_decrypt(m, kr, kg, kb, d, n):
     combined_image = combine_channels(r_plain, g_plain, b_plain, w, h) / 255.0
 
     return combined_image
-
-
-
-
 
 
 
