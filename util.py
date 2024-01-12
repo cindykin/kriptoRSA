@@ -47,13 +47,12 @@ def isPrime(num):
   else:
       return False
   
-
 def gen_prime():
     while True:
       num = random.randint(2**7, 2**10)
       if isPrime(num):
         return num
-        
+  
 def gcd(a, b):
     while b:
         a, b = b, a % b
@@ -101,6 +100,8 @@ def gen_keypair():
   d = gen_private_key(e, totient)
 
   return e, d, n
+
+
 
 
 
@@ -180,67 +181,3 @@ def RSA_decrypt(m, kr, kg, kb, d, n):
     combined_image = combine_channels(r_plain, g_plain, b_plain, w, h) / 255.0
 
     return combined_image
-
-
-
-# st.title('RSA Photo ')
-
-# selected = option_menu(
-#    menu_title = None,
-#    options = ["Generate Keypair", "Encryption & Decryption"],
-#    default_index = 0,
-#    orientation = "horizontal",
-# )
-
-# if selected == "Generate Keypair":
-#    if st.button("Generate Key Pair"):
-#         e, d, n = gen_keypair()
-#         st.success(f"Public Key (e): {e}")
-#         st.success(f"Private Key (d): {d}")
-#         st.success(f"Modulus (n): {n}")
-# if selected == "Encryption & Decryption":
-#    # File uploader
-#     uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"])
-
-#     # Public key input
-#     e = st.number_input("Enter public key exponent (e)", min_value=0, step=1, value=0)
-#     n = st.number_input("Enter modulus (n)", min_value=0, step=1, value=0)
-#     d = st.number_input("Enter private key (d)", min_value=0, step=1, value=0)
-
-#     if 'button_clicked' not in st.session_state:
-#       st.session_state.button_clicked = False
-
-#     encryption_completed = False
-#     if uploaded_file and st.button("Process"):
-#         st.session_state.button_clicked = True
-
-#         encrypted_image, key_r_path, key_g_path, key_b_path = RSA_encrypt(uploaded_file, e, n)
-
-#         st.image(encrypted_image, caption="Encrypted Image", use_column_width=True)
-
-#         encrypted_image_path = 'encrypted_image.jpg'
-#         plt.imsave(encrypted_image_path, encrypted_image, format='jpg')
-
-#         decrypted_image = RSA_decrypt(encrypted_image, key_r_path, key_g_path, key_b_path, d, n)
-#         st.image(decrypted_image, caption="Decrypted Image", use_column_width=True)
-
-#         decrypted_image_path = 'decrypted_image.jpg'
-#         plt.imsave(decrypted_image_path, decrypted_image, format='jpg')
-
-#         with zipfile.ZipFile('encrypted_data.zip', 'w') as zip_file:
-#           zip_file.write('encrypted_image.jpg')
-#           zip_file.write('decrypted_image.jpg')
-#           zip_file.write(key_r_path)
-#           zip_file.write(key_g_path)
-#           zip_file.write(key_b_path)
-
-#         encryption_completed = True
-
-#     if encryption_completed:
-#       with open('encrypted_data.zip', 'rb') as zip_file:
-#           st.download_button(
-#               label="Download Data",
-#               data=zip_file,
-#               file_name='encrypted_data.zip',
-#               mime='application/zip',
-#           )
